@@ -4,6 +4,7 @@ const canvasCtx = canvasElement.getContext('2d');
 
 function onResults(results) {
     canvasCtx.save();
+    canvasCtx.scale(-1, 1);
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     canvasCtx.drawImage(
         results.image, 0, 0, canvasElement.width, canvasElement.height);
@@ -17,9 +18,11 @@ function onResults(results) {
     canvasCtx.restore();
 }
 
-const hands = new Hands({locateFile: (file) => {
+const hands = new Hands({
+    locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-    }});
+    }
+});
 hands.setOptions({
     maxNumHands: 2,
     modelComplexity: 1,
